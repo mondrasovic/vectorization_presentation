@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>The Importance of Vectorization</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/custom.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<!-- ########################################################################### -->
+				<section>
+					<h1>On The Importance of Vectorization</h1>
+					<h2>Avoiding loops unless necessary</h2>
+					<hr>
+					<p><b>Milan Ondrašovič</b></p>
+					<p><small>milan.ondrasovic@gmail.com, milan.ondrasovic@rossum.ai</small></p>
+				</section>
+
+				<!-- ########################################################################### -->
+				<section>
+					<h2>Personal Introduction</h2>
+					<p class="fragment fade-up">Milan Ondrašovič, 28 years old</p>
+					<p class="fragment fade-up">Studied applied informatics</p>
+					<p class="fragment fade-up">Doctorate degree in deep machine learning</p>
+					<p class="fragment fade-up">Currently working as a machine learning research engineer at Rossum</p>
+				</section>
+
+				<!-- ########################################################################### -->
+				<section>
+					<h2>Prerequisites</h2>
+					<ul>
+						<li>Knowledge of the Python programming language</li>
+						<li>Basic experience with NumPy library</li>
+					</ul>
+				</section>
+
+				<!-- ########################################################################### -->
+				<section>
+					<h2>What is meant by vectorization here?</h2>
+					<section>
+						<p class="fragment fade-up">The process of implementing an algorithm so that multiple instructions can be executed in parallel.</p>
+						<!-- <p>A concomitant absence of any explicit looping, indexing, etc., in the code.</p> -->
+					</section>
+					<section>
+						<p class="fragment fade-up">It is not the process of converting from a bitmap image to a vector representation.</p>
+						<p class="fragment fade-up">Nor is it a linear transformation which converts a matrix into a column vector.</p>
+					</section>
+				</section>
+
+				<!-- ########################################################################### -->
+				<section>
+					<h2>Vectorization Example</h2>
+					<section>
+						<p class="fragment fade-in">Assume a task of computing a sum of squares of multiple numbers.</p>
+						<p class="fragment fade-in">Let $\mathbf{x} = [ x_1, x_2, \dots, x_n ]$ be a list of $n$ real numbers, such that $x_i \in \mathcal{R}$, for $i = 1, \dots, n$.</p>
+						<p class="fragment fade-in">The sum of squares is defined as $s = \sum_{i = 1}^{n} x_i^2$.</p>
+					</section>
+					<section>
+						<pre class="fragment fade-in" data-fragment-index="1">
+							<code data-trim data-noescape class="python">
+							# Generate 100 000 random integers in interval <0, 1000)
+							vals = np.random.randint(low=0, high=1_000, size=100_000)
+							</code>
+						</pre>
+						<pre class="fragment fade-in" data-fragment-index="2">
+							<code data-trim data-noescape class="python">
+							# Standard (inefficient) loop-based implementation
+							def calc_squared_sum_basic(vals):
+								result = 0
+								for val in vals:
+									result += val ** 2
+								return result
+							</code>
+						</pre>
+						<pre class="fragment fade-in" data-fragment-index="3">
+							<code data-trim data-noescape class="python">
+							# Standard (improved) comprehension-based implementation
+							def calc_squared_sum_comprehension(vals):
+								return sum(val ** 2 for val in vals)
+							</code>
+						</pre>
+						<pre class="fragment fade-in" data-fragment-index="4">
+							<code data-trim data-noescape class="python">
+							# Non-standard (efficient) vectorized implementation
+							def calc_squared_sum_vectorized(vals):
+								return np.sum(np.asarray(vals) ** 2)
+							</code>
+						</pre>
+					</section>
+					<section>
+						<table>
+							<tr>
+								<td>Time</td>
+								<td>Time</td>
+								<td>Time</td>
+							</tr>
+						</table>
+						<p class="fragment fade-in"><small><i>Benchmarking performed on AMD Ryzen 5 5500, Ubuntu 22.04.3 LTS</i></small></p>
+					</section>
+				</section>
+
+				<!-- ########################################################################### -->
+				<section>
+					<h2>Broadcasting</h2>
+					<div class="r-vstack">
+						<div class="fragment">
+							aaaa
+							<!-- <p style="padding: 1.00em; background: #eee; margin: 0.25em">One</p> -->
+						</div>
+						<div class="fragment">
+							<p style="padding: 1.00em; background: #eee; margin: 0.25em">Two</p>
+						</div>
+						<div class="fragment">
+							<p style="padding: 1.00em; background: #eee; margin: 0.25em">Three</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- ########################################################################### -->
+				<section>Math
+					<div class="fragment">
+						\[ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} =
+						1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+						{1+\frac{e^{-8\pi}} {1+\ldots} } } } \]
+					</div>
+					<div class="fragment">
+						\[ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} =
+						1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+						{1+\frac{e^{-8\pi}} {1+\ldots} } } } \]
+					</div>
+				</section>
+				<section>Slide 3</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/math/math.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				history: true,
+				transition: 'linear',
+
+				mathjax2: {
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.MathJax2 ]
+			});
+		</script>
+	</body>
+</html>
