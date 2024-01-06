@@ -2,7 +2,7 @@
 title: The Importance of Vectorization
 author: Milan Ondrašovič
 format: revealjs
-theme: league
+theme: moon
 highlight-style: base16-tomorrow
 defaultTiming: 140
 width: 1920
@@ -20,9 +20,9 @@ height: 1080
 
 ***Milan Ondrašovič***
 
-[rossum.ai](https://rossum.ai)
+milan.ondrasovic@gmail.com
 
-milan.ondrasovic@gmail.com, milan.ondrasovic@rossum.ai
+[rossum.ai](https://rossum.ai)
 
 ---
 
@@ -101,8 +101,9 @@ def calc_squared_sum_vectorized(vals):
 ### Broadcasting
 
 * It stands at the core of vectorizing array operations to make looping efficient
-* Assuming certain conditions are met, the smaller array is “broadcast” across the larger array to assure shape compatibility
- * Fun fact: even some mathematical books, e.g., [Deep Learning](https://www.deeplearningbook.org/) by *I. Goodfellow*, *Y. Bengio*, and *A. Courville*, have adopted the broadcasting notation to simplify formulas, even though it's "against the rules" of linear algebra
+* The smaller array is “broadcast” across the larger array to assure shape compatibility
+
+> Fun fact: even some mathematical books, e.g., [Deep Learning](https://www.deeplearningbook.org/) by *I. Goodfellow*, *Y. Bengio*, and *A. Courville*, have adopted the broadcasting notation to simplify formulas, even though it's "against the rules" of linear algebra
 
 ---
 
@@ -116,4 +117,20 @@ def calc_squared_sum_vectorized(vals):
 
 ---
 
-### Boradcasting Rules
+### Vectorization Has Its Standard
+
+* Multiple libraries adopted a similar approach to vectorization "syntax", e.g.:
+  * [NumPy](https://numpy.org/doc/)
+  * 🔥[PyTorch](https://pytorch.org/)
+  * [TensorFlow](https://www.tensorflow.org/)
+* Many libraries are built on top of the aforementioned ones, e.g.:
+  * [opencv-python](https://pypi.org/project/opencv-python/)
+  * [scikit-learn](https://scikit-learn.org/stable/)
+  * [scikit-image](https://scikit-image.org/)
+
+---
+
+### Kinda Domain-specific Language
+
+
+
