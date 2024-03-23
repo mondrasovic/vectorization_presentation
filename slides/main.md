@@ -90,7 +90,8 @@ _paginate: false
 
 ***Milan Ondrašovič***
 
-<span style="font-size:50%">**PyData** - 29. 2. 2024</span>
+<span style="font-size:50%">Originally presented at **PyData Prague** - 29. 2. 2024</span>
+<span style="font-size:50%">Modified version presented at **Faculty of Management Science and Informatics** - 26. 3. 2024</span>
 
 <span style="font-size:40%">**Machine learning research engineer** at [ROSSUM](https://rossum.ai) Czech Republic, s.r.o.</span>
 
@@ -155,6 +156,22 @@ _footer: ★It's not **image conversion** (bitmap to vector representation) or a
 <!--
 Looping is executed in optimized C rather than Python
 -->
+
+---
+<!--
+_header: Introduction - Motivation for University Students (Extra Slide)
+_footer: Vectorization is a **paradigm of thinking** rather than just a library to use, it **requires practice**❗
+-->
+## Vectorization and Machine Learning
+
+<div class="horizontal-section">
+  <div class="important-term-horizontal">
+  Vectorization is an indispensable part of machine learning - unless you're willing to wait days to finish your computation (sometimes)😏
+  </div>
+</div>
+
+- **Data scientists**: data cleaning and preprocessing, Exploratory Data Analysis (EDA), time series analysis
+- **Machine learning engineers**/**researchers** - feature engineering, model training and inference, neural network computations 
 
 ---
 <!--
